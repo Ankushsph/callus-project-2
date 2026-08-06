@@ -3,15 +3,23 @@
 import spacy
 from typing import List, Dict
 from schemas import AnalyzeResponse, SentenceResult
+from analyzers import PerplexityAnalyzer, BurstinessAnalyzer, LexicalDiversityAnalyzer, PatternAnalyzer
 
 
 class DetectionPipeline:
     """Orchestrates the detection workflow."""
     
     def __init__(self):
-        """Initialize pipeline with NLP model."""
+        """Initialize pipeline with NLP model and analyzers."""
         print("Loading spaCy model...")
         self.nlp = spacy.load("en_core_web_sm")
+        
+        print("Initializing analyzers...")
+        self.perplexity_analyzer = PerplexityAnalyzer()
+        self.burstiness_analyzer = BurstinessAnalyzer()
+        self.lexical_analyzer = LexicalDiversityAnalyzer()
+        self.pattern_analyzer = PatternAnalyzer()
+        
         print("Pipeline ready.")
     
     def is_ready(self) -> bool:
@@ -40,26 +48,45 @@ class DetectionPipeline:
         """
         Compute AI likelihood scores for each sentence.
         
-        Currently returns placeholder scores. Will be implemented in Phase 2.
+        Runs all 4 analyzers and combines scores.
         """
         results = []
         
+        # Extract sentence texts for burstiness (needs all sentences)
+        sentence_texts = [s["text"] for s in sentences]
+        burstiness_score, burstiness_evidence = self.burstiness_analyzer.analyze(sentence_texts)
+        
         for sent in sentences:
-            # Placeholder: all sentences scored as 50 (neutral)
-            score = 50.0
+            text = sent["text"]
+            
+            # Run analyzers
+            perplexity_score, perplexity_evidence = self.perplexity_analyzer.analyze(text)
+            lexical_score, lexical_evidence = self.lexical_analyzer.analyze(text)
+            pattern_score, pattern_evidence = self.pattern_analyzer.analyze(text)
+            
+            # Combine scores (simple average)
             signals = {
-                "perplexity": 50.0,
-                "burstiness": 50.0,
-                "lexical": 50.0,
-                "pattern": 50.0,
+                "perplexity": perplexity_score,
+                "burstiness": burstiness_score,
+                "lexical": lexical_score,
+                "pattern": pattern_score,
             }
-            evidence = ["Analysis not yet implemented"]
+            
+            overall_score = sum(signals.values()) / len(signals)
+            
+            # Collect evidence
+            evidence = [
+                perplexity_evidence,
+                burstiness_evidence,
+                lexical_evidence,
+                pattern_evidence,
+            ]
             
             results.append(SentenceResult(
-                text=sent["text"],
+                text=text,
                 start_char=sent["start_char"],
                 end_char=sent["end_char"],
-                score=score,
+                score=overall_score,
                 signals=signals,
                 evidence=evidence
             ))
