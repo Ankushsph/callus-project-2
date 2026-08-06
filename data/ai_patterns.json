@@ -1,0 +1,45 @@
+{
+  "formulaic_openings": [
+    "in today's rapidly evolving world",
+    "in today's society",
+    "throughout history",
+    "since the dawn of time",
+    "it is important to note that",
+    "it is worth noting that",
+    "in conclusion",
+    "to sum up",
+    "in summary"
+  ],
+  "hedging_phrases": [
+    "arguably",
+    "notably",
+    "essentially",
+    "fundamentally",
+    "particularly",
+    "specifically",
+    "generally speaking",
+    "it can be argued that",
+    "one could say that"
+  ],
+  "transition_cliches": [
+    "furthermore",
+    "moreover",
+    "additionally",
+    "consequently",
+    "nevertheless",
+    "nonetheless",
+    "on the other hand",
+    "that being said",
+    "with that being said"
+  ],
+  "generic_phrases": [
+    "plays a crucial role",
+    "is of utmost importance",
+    "cannot be overstated",
+    "it is essential to",
+    "it is imperative that",
+    "sheds light on",
+    "delves into",
+    "explores the intricacies of"
+  ]
+}
