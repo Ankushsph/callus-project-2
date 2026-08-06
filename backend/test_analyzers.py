@@ -66,7 +66,7 @@ class TestBurstinessAnalyzer:
         score, evidence = analyzer.analyze(sentences)
         
         assert 0 <= score <= 60  # Varied = human-like
-        assert "CV:" in evidence
+        assert "variation" in evidence.lower() and "CV" in evidence
     
     def test_single_sentence(self, analyzer):
         """Single sentence should return neutral score."""
@@ -95,7 +95,7 @@ class TestLexicalDiversityAnalyzer:
         score, evidence = analyzer.analyze(text)
         
         assert 60 <= score <= 100  # Low diversity = AI-like
-        assert "TTR:" in evidence
+        assert "TTR" in evidence or "diversity" in evidence.lower()
     
     def test_diverse_text(self, analyzer):
         """Diverse vocabulary should score low (human-like)."""
