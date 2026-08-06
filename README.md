@@ -39,16 +39,14 @@ See `docs/ADRs/` for key architectural decisions:
 
 ## Test Results
 
-**Test Set**: 20 essays (10 human, 10 AI-generated)
+**Status**: Evaluation pending (Phase 4)
 
-| Metric | Score |
-|--------|-------|
-| Accuracy | TBD |
-| Precision | TBD |
-| Recall | TBD |
-| F1 | TBD |
+Test dataset and evaluation will be completed with:
+- 20 essays (10 human, 10 AI-generated)
+- Accuracy, Precision, Recall, F1 metrics
+- 3 documented failure cases with analysis
 
-**Three Failure Cases**: See `data/results.json` for detailed analysis of essays the detector gets confidently wrong.
+Results will be available in `data/results.json` after evaluation.
 
 ## Limitations
 
@@ -60,8 +58,8 @@ See `docs/ADRs/` for key architectural decisions:
 
 ## Tech Stack
 
-**Backend**: Python 3.11, FastAPI, spaCy, transformers (GPT-2 small)
-**Frontend**: React 18, TypeScript, Vite, TailwindCSS
+**Backend**: Python 3.11, FastAPI, spaCy, transformers (GPT-2 small)  
+**Frontend**: React 18, TypeScript, Vite  
 **Deployment**: Docker + docker-compose
 
 ## Development
