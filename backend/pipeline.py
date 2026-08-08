@@ -64,7 +64,8 @@ class DetectionPipeline:
             lexical_score, lexical_evidence = self.lexical_analyzer.analyze(text)
             pattern_score, pattern_evidence = self.pattern_analyzer.analyze(text)
             
-            # Combine scores (simple average)
+            # Combine scores with weighted average
+            # Pattern matching is less reliable for modern AI, so weight it less
             signals = {
                 "perplexity": perplexity_score,
                 "burstiness": burstiness_score,
@@ -72,7 +73,15 @@ class DetectionPipeline:
                 "pattern": pattern_score,
             }
             
-            overall_score = sum(signals.values()) / len(signals)
+            # Weighted combination (perplexity and lexical more reliable)
+            weights = {
+                "perplexity": 0.35,
+                "burstiness": 0.30,
+                "lexical": 0.25,
+                "pattern": 0.10,  # Modern AI avoids clichés, so lower weight
+            }
+            
+            overall_score = sum(signals[k] * weights[k] for k in signals.keys())
             
             # Collect evidence
             evidence = [

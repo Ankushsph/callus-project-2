@@ -63,21 +63,27 @@ class PerplexityAnalyzer:
             # Perplexity = exp(loss)
             perplexity = torch.exp(loss).item()
             
-            # Convert to 0-100 score
-            # Typical ranges: Human ~50-150, AI ~20-60
+            # Convert to 0-100 score with finer granularity
+            # Empirical ranges: Human ~60-150, Modern AI ~20-50
             # Lower perplexity → higher score (more AI-like)
             if perplexity < 20:
                 score = 100.0
+            elif perplexity < 30:
+                score = 90.0
             elif perplexity < 40:
                 score = 80.0
-            elif perplexity < 60:
-                score = 60.0
-            elif perplexity < 100:
+            elif perplexity < 50:
+                score = 70.0
+            elif perplexity < 65:
+                score = 55.0
+            elif perplexity < 85:
                 score = 40.0
+            elif perplexity < 120:
+                score = 25.0
             else:
-                score = 20.0
+                score = 15.0
             
-            evidence = f"Perplexity: {perplexity:.1f} (expected human range: 50-150)"
+            evidence = f"Perplexity: {perplexity:.1f} (modern AI typically: 20-50, human: 60-150)"
             return score, evidence
             
         except Exception as e:
@@ -117,20 +123,21 @@ class BurstinessAnalyzer:
         
         cv = std_length / mean_length
         
-        # Typical ranges: Human CV ~0.4-0.8, AI CV ~0.2-0.4
+        # Modern AI (Claude 3.5, GPT-4) shows CV ~0.25-0.50 (more uniform than human)
+        # Human writing shows CV ~0.50-0.90 (more variable)
         # Lower CV (uniform) → higher score (more AI-like)
-        if cv < 0.2:
-            score = 90.0
-        elif cv < 0.4:
-            score = 70.0
-        elif cv < 0.6:
-            score = 50.0
-        elif cv < 0.8:
-            score = 30.0
+        if cv < 0.25:
+            score = 95.0  # Very uniform = very AI-like
+        elif cv < 0.35:
+            score = 80.0  # Uniform = AI-like
+        elif cv < 0.50:
+            score = 60.0  # Moderate = borderline
+        elif cv < 0.70:
+            score = 35.0  # Variable = human-like
         else:
-            score = 10.0
+            score = 15.0  # Very variable = very human-like
         
-        evidence = f"Sentence length variation (CV): {cv:.2f} (expected human: 0.4-0.8, AI: 0.2-0.4)"
+        evidence = f"Sentence length variation (CV): {cv:.2f} (modern AI typically: 0.25-0.50, human: 0.50-0.90)"
         return score, evidence
 
 
@@ -159,22 +166,21 @@ class LexicalDiversityAnalyzer:
         unique_words = set(words)
         ttr = len(unique_words) / len(words)
         
-        # Typical ranges: Human TTR ~0.5-0.7, AI TTR ~0.6-0.8
-        # Higher TTR can indicate AI trying to be "sophisticated"
-        # Lower TTR can indicate AI repeating safe words
-        # We focus on LOW TTR (repetitive) as AI signal
-        if ttr < 0.4:
-            score = 80.0
-        elif ttr < 0.5:
-            score = 60.0
-        elif ttr < 0.6:
-            score = 40.0
-        elif ttr < 0.75:
-            score = 30.0
+        # Modern AI (GPT-4, Claude 3.5) exhibits HIGH TTR (sophisticated vocabulary)
+        # Human writing shows more moderate TTR with natural repetition
+        # Higher TTR → higher score (more AI-like)
+        if ttr >= 0.85:
+            score = 90.0  # Very high diversity = very AI-like
+        elif ttr >= 0.75:
+            score = 70.0  # High diversity = AI-like
+        elif ttr >= 0.65:
+            score = 50.0  # Moderate-high = borderline
+        elif ttr >= 0.55:
+            score = 30.0  # Moderate = human-like
         else:
-            score = 20.0
+            score = 20.0  # Low diversity = human-like
         
-        evidence = f"Lexical diversity (TTR): {ttr:.2f}, {len(unique_words)} unique words in {len(words)} total (expected: 0.5-0.7)"
+        evidence = f"Lexical diversity (TTR): {ttr:.2f}, {len(unique_words)} unique words in {len(words)} total (modern AI typically: 0.70-0.85)"
         return score, evidence
 
 

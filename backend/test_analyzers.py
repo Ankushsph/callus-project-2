@@ -90,19 +90,19 @@ class TestLexicalDiversityAnalyzer:
         return LexicalDiversityAnalyzer()
     
     def test_repetitive_text(self, analyzer):
-        """Repetitive text should score high (AI-like)."""
+        """Repetitive text should score low (human-like with natural repetition)."""
         text = "the the the the the the the the the the"
         score, evidence = analyzer.analyze(text)
         
-        assert 60 <= score <= 100  # Low diversity = AI-like
+        assert 0 <= score <= 40  # Low diversity = human-like
         assert "TTR" in evidence or "diversity" in evidence.lower()
     
     def test_diverse_text(self, analyzer):
-        """Diverse vocabulary should score low (human-like)."""
+        """Diverse vocabulary should score high (AI-like sophisticated vocabulary)."""
         text = "Every single word here is completely different and unique from others"
         score, evidence = analyzer.analyze(text)
         
-        assert 0 <= score <= 50  # High diversity = human-like
+        assert 50 <= score <= 100  # High diversity = AI-like
         assert "unique words" in evidence
     
     def test_short_text(self, analyzer):
