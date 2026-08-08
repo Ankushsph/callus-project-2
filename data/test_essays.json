@@ -1,5 +1,97 @@
 {
   "description": "Test set for evaluating detector accuracy",
-  "created": "2026-08-06",
-  "essays": []
+  "created": "2026-08-08",
+  "dataset_status": "INCOMPLETE - Awaiting 10 human essays",
+  "essays": [
+    {
+      "id": 1,
+      "text": "Throughout my high school years, I have consistently demonstrated a commitment to academic excellence and personal growth. My participation in various extracurricular activities has enabled me to develop essential leadership skills. These experiences have shaped my character and prepared me for the challenges of college life. I am confident that my dedication and enthusiasm will contribute positively to your institution's vibrant academic community.",
+      "label": "ai",
+      "source": "Claude 3.5 Sonnet",
+      "generation_prompt": "Write a brief, generic college admissions essay",
+      "generated_date": "2026-08-08",
+      "notes": "Generic, formulaic structure typical of AI-generated admissions essays"
+    },
+    {
+      "id": 2,
+      "text": "The moment I stepped into the robotics lab, I knew I had found my passion. Working alongside my teammates, we faced numerous challenges in designing our competition robot. Through countless iterations and late-night debugging sessions, I learned that failure is not the opposite of success, but rather a stepping stone toward it. This experience taught me the value of perseverance, collaboration, and creative problem-solving—skills I will bring to your engineering program.",
+      "label": "ai",
+      "source": "Claude 3.5 Sonnet",
+      "generation_prompt": "Write a college essay about robotics competition with focus on overcoming challenges",
+      "generated_date": "2026-08-08",
+      "notes": "Common 'overcome challenges' narrative structure"
+    },
+    {
+      "id": 3,
+      "text": "Diversity, innovation, and intellectual curiosity form the cornerstone of my academic philosophy. As an individual who values interdisciplinary learning, I have actively sought opportunities to expand my knowledge beyond the traditional classroom setting. My involvement in community service projects has reinforced my belief in the importance of giving back to society. I am eager to contribute my unique perspective to the diverse tapestry of your student body.",
+      "label": "ai",
+      "source": "Claude 3.5 Sonnet",
+      "generation_prompt": "Write a college essay emphasizing values and community service",
+      "generated_date": "2026-08-08",
+      "notes": "High use of abstract concepts, formal vocabulary, lacks specific details"
+    },
+    {
+      "id": 4,
+      "text": "In conclusion, my academic achievements, extracurricular involvement, and personal qualities make me an ideal candidate for admission. I am passionate about learning and committed to making a positive impact. Your institution's reputation for excellence aligns perfectly with my goals. I look forward to the opportunity to contribute to and learn from your esteemed academic community. Thank you for considering my application.",
+      "label": "ai",
+      "source": "Claude 3.5 Sonnet",
+      "generation_prompt": "Write a college essay conclusion paragraph",
+      "generated_date": "2026-08-08",
+      "notes": "Typical AI conclusion with generic praise and formulaic structure"
+    },
+    {
+      "id": 5,
+      "text": "My journey toward understanding the complexities of environmental science began during a summer internship at a local conservation center. Observing the delicate balance of ecosystems firsthand ignited a profound appreciation for the natural world. Subsequently, I initiated a campus-wide recycling program, which successfully reduced our school's waste output by thirty percent. This experience demonstrated the tangible impact of individual initiative and collective action in addressing environmental challenges.",
+      "label": "ai",
+      "source": "Claude 3.5 Sonnet",
+      "generation_prompt": "Write a college essay about environmental science with specific achievement",
+      "generated_date": "2026-08-08",
+      "notes": "Formal academic tone, structured narrative, specific but predictable achievement"
+    },
+    {
+      "id": 6,
+      "text": "As I reflect upon my formative years, I recognize that my identity has been shaped by the intersection of multiple cultural traditions. Growing up in a bilingual household exposed me to diverse perspectives and fostered an appreciation for cross-cultural communication. These experiences have cultivated in me a global mindset and an understanding of the importance of cultural sensitivity in an increasingly interconnected world.",
+      "label": "ai",
+      "source": "Claude 3.5 Sonnet",
+      "generation_prompt": "Write a college essay about cultural identity and bilingual background",
+      "generated_date": "2026-08-08",
+      "notes": "Abstract, reflective tone with formal language structure"
+    },
+    {
+      "id": 7,
+      "text": "The realm of mathematics has always fascinated me with its elegant logic and universal applicability. My participation in regional mathematics competitions has honed my analytical thinking and problem-solving abilities. Beyond the competitions, I have volunteered as a math tutor for underclassmen, discovering that teaching others deepens one's own understanding. I am enthusiastic about pursuing advanced mathematical studies at your institution and contributing to your research initiatives.",
+      "label": "ai",
+      "source": "Claude 3.5 Sonnet",
+      "generation_prompt": "Write a college essay about mathematics passion and tutoring",
+      "generated_date": "2026-08-08",
+      "notes": "Formulaic structure: interest statement → evidence → teaching → future goals"
+    },
+    {
+      "id": 8,
+      "text": "Leadership is not merely about holding a title; it is about inspiring others and effecting meaningful change. As student body president, I implemented several initiatives aimed at enhancing school spirit and student engagement. Through active listening and collaborative decision-making, I learned to navigate diverse opinions and build consensus. These experiences have prepared me to assume leadership roles in college and beyond.",
+      "label": "ai",
+      "source": "Claude 3.5 Sonnet",
+      "generation_prompt": "Write a college essay about student government leadership",
+      "generated_date": "2026-08-08",
+      "notes": "Opens with abstract definition, followed by achievement claims, ends with future application"
+    },
+    {
+      "id": 9,
+      "text": "The intersection of technology and healthcare represents an exciting frontier in modern medicine. My shadowing experience with a pediatric surgeon revealed the profound impact that medical professionals have on patients' lives. Witnessing the integration of cutting-edge surgical techniques with compassionate patient care solidified my aspiration to pursue a career in medicine. I am committed to leveraging technological innovation to improve healthcare outcomes for underserved communities.",
+      "label": "ai",
+      "source": "Claude 3.5 Sonnet",
+      "generation_prompt": "Write a college essay about medicine and healthcare technology",
+      "generated_date": "2026-08-08",
+      "notes": "Formal medical/technical vocabulary, mission statement style conclusion"
+    },
+    {
+      "id": 10,
+      "text": "Creativity and analytical thinking need not be mutually exclusive. As someone deeply invested in both visual arts and computer science, I have discovered unexpected synergies between these disciplines. My work developing an interactive art installation that responds to viewer movements exemplifies this integration. This project challenged me to think beyond conventional boundaries and embrace interdisciplinary approaches to problem-solving.",
+      "label": "ai",
+      "source": "Claude 3.5 Sonnet",
+      "generation_prompt": "Write a college essay about combining art and computer science",
+      "generated_date": "2026-08-08",
+      "notes": "Thesis-driven opening, specific project example, thematic conclusion"
+    }
+  ]
 }
