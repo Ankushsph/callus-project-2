@@ -1,18 +1,430 @@
 {
   "description": "Evaluation results on test set",
-  "evaluated": "TBD",
-  "test_set_size": 0,
+  "evaluated": "2026-08-08 21:31:24",
+  "test_set_size": 20,
   "metrics": {
-    "accuracy": 0.0,
-    "precision": 0.0,
+    "accuracy": 0.5,
+    "precision": 0,
     "recall": 0.0,
-    "f1": 0.0
+    "f1": 0
   },
   "confusion_matrix": {
     "true_positives": 0,
+    "true_negatives": 10,
     "false_positives": 0,
-    "true_negatives": 0,
-    "false_negatives": 0
+    "false_negatives": 10
   },
-  "failure_cases": []
+  "failure_cases": [
+    {
+      "essay_id": 10,
+      "actual": "ai",
+      "predicted": "human",
+      "score": 39.375,
+      "verdict": "HUMAN",
+      "analyzer_scores": {
+        "perplexity": 60.0,
+        "burstiness": 70.0,
+        "lexical": 27.5,
+        "pattern": 0.0
+      },
+      "source": "Claude 3.5 Sonnet",
+      "text_excerpt": "Creativity and analytical thinking need not be mutually exclusive. As someone deeply invested in both visual arts and computer science, I have discovered unexpected synergies between these disciplines...",
+      "analysis": {
+        "why_it_failed": "The detector classified this AI-generated essay (score=39.4) as human because all four analyzer signals indicated human-like characteristics.",
+        "signal_breakdown": {
+          "perplexity": "60.0/100 - HIGH perplexity indicates the text was unpredictable to GPT-2, suggesting human variability. However, modern LLMs like Claude 3.5 Sonnet are trained to produce human-like variability.",
+          "burstiness": "70.0/100 - HIGH burstiness suggests varied sentence lengths, typically human. Claude intentionally varies sentence structure to avoid robotic patterns.",
+          "lexical": "27.5/100 - LOW lexical repetition indicates diverse vocabulary with minimal word reuse, which is human-like. Modern LLMs avoid repetitive phrasing.",
+          "pattern": "0.0/100 - No detection of known AI phrases. Claude avoids obvious markers like 'delve into' or 'It is important to note'."
+        },
+        "root_cause": "**Fundamental limitation: The detector was designed to catch GPT-2-era AI writing (2019), but modern LLMs (2024-2026) have evolved significantly.** Claude 3.5 Sonnet produces text with human-like perplexity, varied sentence rhythm, diverse vocabulary, and avoids formulaic phrases. The detector's signals are based on characteristics that no longer distinguish modern AI from human writing.",
+        "possible_improvements": [
+          "Add detection of subtler patterns: Modern AI often uses formal academic register consistently, avoids contractions, and maintains perfect grammar throughout (unlike most human student writing).",
+          "Analyze structural coherence: AI essays often have suspiciously perfect paragraph transitions and balanced structure.",
+          "Detect 'too good' signals: Lack of typos, consistent sophistication, and absence of colloquialisms may indicate AI.",
+          "Use more recent perplexity models: GPT-2 (2019) is outdated; using GPT-4 or Claude-based perplexity might work better.",
+          "Add stylometric analysis: Measure consistency in writing style, which humans vary more than AI.",
+          "Consider semantic coherence: AI sometimes produces logically perfect but experientially hollow narratives."
+        ]
+      }
+    },
+    {
+      "essay_id": 2,
+      "actual": "ai",
+      "predicted": "human",
+      "score": 41.25,
+      "verdict": "SUSPICIOUS",
+      "analyzer_scores": {
+        "perplexity": 75.0,
+        "burstiness": 70.0,
+        "lexical": 20.0,
+        "pattern": 0.0
+      },
+      "source": "Claude 3.5 Sonnet",
+      "text_excerpt": "The moment I stepped into the robotics lab, I knew I had found my passion. Working alongside my teammates, we faced numerous challenges in designing our competition robot. Through countless iterations...",
+      "analysis": {
+        "why_it_failed": "The detector classified this AI-generated essay (score=41.2) as human because all four analyzer signals indicated human-like characteristics.",
+        "signal_breakdown": {
+          "perplexity": "75.0/100 - HIGH perplexity indicates the text was unpredictable to GPT-2, suggesting human variability. However, modern LLMs like Claude 3.5 Sonnet are trained to produce human-like variability.",
+          "burstiness": "70.0/100 - HIGH burstiness suggests varied sentence lengths, typically human. Claude intentionally varies sentence structure to avoid robotic patterns.",
+          "lexical": "20.0/100 - LOW lexical repetition indicates diverse vocabulary with minimal word reuse, which is human-like. Modern LLMs avoid repetitive phrasing.",
+          "pattern": "0.0/100 - No detection of known AI phrases. Claude avoids obvious markers like 'delve into' or 'It is important to note'."
+        },
+        "root_cause": "**Fundamental limitation: The detector was designed to catch GPT-2-era AI writing (2019), but modern LLMs (2024-2026) have evolved significantly.** Claude 3.5 Sonnet produces text with human-like perplexity, varied sentence rhythm, diverse vocabulary, and avoids formulaic phrases. The detector's signals are based on characteristics that no longer distinguish modern AI from human writing.",
+        "possible_improvements": [
+          "Add detection of subtler patterns: Modern AI often uses formal academic register consistently, avoids contractions, and maintains perfect grammar throughout (unlike most human student writing).",
+          "Analyze structural coherence: AI essays often have suspiciously perfect paragraph transitions and balanced structure.",
+          "Detect 'too good' signals: Lack of typos, consistent sophistication, and absence of colloquialisms may indicate AI.",
+          "Use more recent perplexity models: GPT-2 (2019) is outdated; using GPT-4 or Claude-based perplexity might work better.",
+          "Add stylometric analysis: Measure consistency in writing style, which humans vary more than AI.",
+          "Consider semantic coherence: AI sometimes produces logically perfect but experientially hollow narratives."
+        ]
+      }
+    },
+    {
+      "essay_id": 7,
+      "actual": "ai",
+      "predicted": "human",
+      "score": 42.5,
+      "verdict": "SUSPICIOUS",
+      "analyzer_scores": {
+        "perplexity": 60.0,
+        "burstiness": 90.0,
+        "lexical": 20.0,
+        "pattern": 0.0
+      },
+      "source": "Claude 3.5 Sonnet",
+      "text_excerpt": "The realm of mathematics has always fascinated me with its elegant logic and universal applicability. My participation in regional mathematics competitions has honed my analytical thinking and problem...",
+      "analysis": {
+        "why_it_failed": "The detector classified this AI-generated essay (score=42.5) as human because all four analyzer signals indicated human-like characteristics.",
+        "signal_breakdown": {
+          "perplexity": "60.0/100 - HIGH perplexity indicates the text was unpredictable to GPT-2, suggesting human variability. However, modern LLMs like Claude 3.5 Sonnet are trained to produce human-like variability.",
+          "burstiness": "90.0/100 - HIGH burstiness suggests varied sentence lengths, typically human. Claude intentionally varies sentence structure to avoid robotic patterns.",
+          "lexical": "20.0/100 - LOW lexical repetition indicates diverse vocabulary with minimal word reuse, which is human-like. Modern LLMs avoid repetitive phrasing.",
+          "pattern": "0.0/100 - No detection of known AI phrases. Claude avoids obvious markers like 'delve into' or 'It is important to note'."
+        },
+        "root_cause": "**Fundamental limitation: The detector was designed to catch GPT-2-era AI writing (2019), but modern LLMs (2024-2026) have evolved significantly.** Claude 3.5 Sonnet produces text with human-like perplexity, varied sentence rhythm, diverse vocabulary, and avoids formulaic phrases. The detector's signals are based on characteristics that no longer distinguish modern AI from human writing.",
+        "possible_improvements": [
+          "Add detection of subtler patterns: Modern AI often uses formal academic register consistently, avoids contractions, and maintains perfect grammar throughout (unlike most human student writing).",
+          "Analyze structural coherence: AI essays often have suspiciously perfect paragraph transitions and balanced structure.",
+          "Detect 'too good' signals: Lack of typos, consistent sophistication, and absence of colloquialisms may indicate AI.",
+          "Use more recent perplexity models: GPT-2 (2019) is outdated; using GPT-4 or Claude-based perplexity might work better.",
+          "Add stylometric analysis: Measure consistency in writing style, which humans vary more than AI.",
+          "Consider semantic coherence: AI sometimes produces logically perfect but experientially hollow narratives."
+        ]
+      }
+    }
+  ],
+  "all_predictions": [
+    {
+      "essay_id": 1,
+      "actual": "ai",
+      "predicted": "human",
+      "score": 48.75,
+      "verdict": "SUSPICIOUS",
+      "sentence_count": 4,
+      "analyzer_scores": {
+        "perplexity": 85.0,
+        "burstiness": 90.0,
+        "lexical": 20.0,
+        "pattern": 0.0
+      },
+      "source": "Claude 3.5 Sonnet",
+      "confidence_distance": 1.25
+    },
+    {
+      "essay_id": 2,
+      "actual": "ai",
+      "predicted": "human",
+      "score": 41.25,
+      "verdict": "SUSPICIOUS",
+      "sentence_count": 4,
+      "analyzer_scores": {
+        "perplexity": 75.0,
+        "burstiness": 70.0,
+        "lexical": 20.0,
+        "pattern": 0.0
+      },
+      "source": "Claude 3.5 Sonnet",
+      "confidence_distance": 8.75
+    },
+    {
+      "essay_id": 3,
+      "actual": "ai",
+      "predicted": "human",
+      "score": 45.0,
+      "verdict": "SUSPICIOUS",
+      "sentence_count": 4,
+      "analyzer_scores": {
+        "perplexity": 70.0,
+        "burstiness": 90.0,
+        "lexical": 20.0,
+        "pattern": 0.0
+      },
+      "source": "Claude 3.5 Sonnet",
+      "confidence_distance": 5.0
+    },
+    {
+      "essay_id": 4,
+      "actual": "ai",
+      "predicted": "human",
+      "score": 46.75,
+      "verdict": "SUSPICIOUS",
+      "sentence_count": 5,
+      "analyzer_scores": {
+        "perplexity": 72.0,
+        "burstiness": 70.0,
+        "lexical": 26.0,
+        "pattern": 19.0
+      },
+      "source": "Claude 3.5 Sonnet",
+      "confidence_distance": 3.25
+    },
+    {
+      "essay_id": 5,
+      "actual": "ai",
+      "predicted": "human",
+      "score": 43.75,
+      "verdict": "SUSPICIOUS",
+      "sentence_count": 4,
+      "analyzer_scores": {
+        "perplexity": 65.0,
+        "burstiness": 90.0,
+        "lexical": 20.0,
+        "pattern": 0.0
+      },
+      "source": "Claude 3.5 Sonnet",
+      "confidence_distance": 6.25
+    },
+    {
+      "essay_id": 6,
+      "actual": "ai",
+      "predicted": "human",
+      "score": 45.833333333333336,
+      "verdict": "SUSPICIOUS",
+      "sentence_count": 3,
+      "analyzer_scores": {
+        "perplexity": 73.33,
+        "burstiness": 90.0,
+        "lexical": 20.0,
+        "pattern": 0.0
+      },
+      "source": "Claude 3.5 Sonnet",
+      "confidence_distance": 4.166666666666664
+    },
+    {
+      "essay_id": 7,
+      "actual": "ai",
+      "predicted": "human",
+      "score": 42.5,
+      "verdict": "SUSPICIOUS",
+      "sentence_count": 4,
+      "analyzer_scores": {
+        "perplexity": 60.0,
+        "burstiness": 90.0,
+        "lexical": 20.0,
+        "pattern": 0.0
+      },
+      "source": "Claude 3.5 Sonnet",
+      "confidence_distance": 7.5
+    },
+    {
+      "essay_id": 8,
+      "actual": "ai",
+      "predicted": "human",
+      "score": 42.5,
+      "verdict": "SUSPICIOUS",
+      "sentence_count": 4,
+      "analyzer_scores": {
+        "perplexity": 60.0,
+        "burstiness": 90.0,
+        "lexical": 20.0,
+        "pattern": 0.0
+      },
+      "source": "Claude 3.5 Sonnet",
+      "confidence_distance": 7.5
+    },
+    {
+      "essay_id": 9,
+      "actual": "ai",
+      "predicted": "human",
+      "score": 43.75,
+      "verdict": "SUSPICIOUS",
+      "sentence_count": 4,
+      "analyzer_scores": {
+        "perplexity": 65.0,
+        "burstiness": 90.0,
+        "lexical": 20.0,
+        "pattern": 0.0
+      },
+      "source": "Claude 3.5 Sonnet",
+      "confidence_distance": 6.25
+    },
+    {
+      "essay_id": 10,
+      "actual": "ai",
+      "predicted": "human",
+      "score": 39.375,
+      "verdict": "HUMAN",
+      "sentence_count": 4,
+      "analyzer_scores": {
+        "perplexity": 60.0,
+        "burstiness": 70.0,
+        "lexical": 27.5,
+        "pattern": 0.0
+      },
+      "source": "Claude 3.5 Sonnet",
+      "confidence_distance": 10.625
+    },
+    {
+      "essay_id": 11,
+      "actual": "human",
+      "predicted": "human",
+      "score": 31.964285714285715,
+      "verdict": "HUMAN",
+      "sentence_count": 14,
+      "analyzer_scores": {
+        "perplexity": 52.86,
+        "burstiness": 50.0,
+        "lexical": 25.0,
+        "pattern": 0.0
+      },
+      "source": "ASAP-AES dataset (essay_id: 20717)"
+    },
+    {
+      "essay_id": 12,
+      "actual": "human",
+      "predicted": "human",
+      "score": 41.92307692307692,
+      "verdict": "SUSPICIOUS",
+      "sentence_count": 13,
+      "analyzer_scores": {
+        "perplexity": 75.38,
+        "burstiness": 70.0,
+        "lexical": 22.31,
+        "pattern": 0.0
+      },
+      "source": "ASAP-AES dataset (essay_id: 20728)"
+    },
+    {
+      "essay_id": 13,
+      "actual": "human",
+      "predicted": "human",
+      "score": 37.916666666666664,
+      "verdict": "HUMAN",
+      "sentence_count": 24,
+      "analyzer_scores": {
+        "perplexity": 69.17,
+        "burstiness": 50.0,
+        "lexical": 32.5,
+        "pattern": 0.0
+      },
+      "source": "ASAP-AES dataset (essay_id: 20734)"
+    },
+    {
+      "essay_id": 14,
+      "actual": "human",
+      "predicted": "human",
+      "score": 36.1764705882353,
+      "verdict": "HUMAN",
+      "sentence_count": 17,
+      "analyzer_scores": {
+        "perplexity": 67.06,
+        "burstiness": 50.0,
+        "lexical": 27.65,
+        "pattern": 0.0
+      },
+      "source": "ASAP-AES dataset (essay_id: 20736)"
+    },
+    {
+      "essay_id": 15,
+      "actual": "human",
+      "predicted": "human",
+      "score": 31.29310344827586,
+      "verdict": "HUMAN",
+      "sentence_count": 29,
+      "analyzer_scores": {
+        "perplexity": 40.69,
+        "burstiness": 50.0,
+        "lexical": 34.48,
+        "pattern": 0.0
+      },
+      "source": "ASAP-AES dataset (essay_id: 20743)"
+    },
+    {
+      "essay_id": 16,
+      "actual": "human",
+      "predicted": "human",
+      "score": 35.97222222222222,
+      "verdict": "HUMAN",
+      "sentence_count": 18,
+      "analyzer_scores": {
+        "perplexity": 62.22,
+        "burstiness": 50.0,
+        "lexical": 31.67,
+        "pattern": 0.0
+      },
+      "source": "ASAP-AES dataset (essay_id: 20751)"
+    },
+    {
+      "essay_id": 17,
+      "actual": "human",
+      "predicted": "human",
+      "score": 40.588235294117645,
+      "verdict": "SUSPICIOUS",
+      "sentence_count": 17,
+      "analyzer_scores": {
+        "perplexity": 67.06,
+        "burstiness": 70.0,
+        "lexical": 25.29,
+        "pattern": 0.0
+      },
+      "source": "ASAP-AES dataset (essay_id: 20766)"
+    },
+    {
+      "essay_id": 18,
+      "actual": "human",
+      "predicted": "human",
+      "score": 43.369565217391305,
+      "verdict": "SUSPICIOUS",
+      "sentence_count": 23,
+      "analyzer_scores": {
+        "perplexity": 76.52,
+        "burstiness": 70.0,
+        "lexical": 26.96,
+        "pattern": 0.0
+      },
+      "source": "ASAP-AES dataset (essay_id: 20767)"
+    },
+    {
+      "essay_id": 19,
+      "actual": "human",
+      "predicted": "human",
+      "score": 35.28846153846154,
+      "verdict": "HUMAN",
+      "sentence_count": 26,
+      "analyzer_scores": {
+        "perplexity": 59.23,
+        "burstiness": 50.0,
+        "lexical": 31.92,
+        "pattern": 0.0
+      },
+      "source": "ASAP-AES dataset (essay_id: 20770)"
+    },
+    {
+      "essay_id": 20,
+      "actual": "human",
+      "predicted": "human",
+      "score": 40.833333333333336,
+      "verdict": "SUSPICIOUS",
+      "sentence_count": 21,
+      "analyzer_scores": {
+        "perplexity": 64.76,
+        "burstiness": 70.0,
+        "lexical": 28.57,
+        "pattern": 0.0
+      },
+      "source": "ASAP-AES dataset (essay_id: 20772)"
+    }
+  ]
 }

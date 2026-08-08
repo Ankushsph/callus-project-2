@@ -118,21 +118,40 @@ def run_evaluation(
         
         # Run detector
         result = pipeline.analyze(text)
-        predicted_score = result['overall_score']
+        
+        # Convert Pydantic model to dict if needed
+        if hasattr(result, 'dict'):
+            result_dict = result.dict()
+        elif hasattr(result, 'model_dump'):
+            result_dict = result.model_dump()
+        else:
+            result_dict = result
+        
+        predicted_score = result_dict['overall_score']
         predicted_label = classify_verdict(predicted_score)
+        
+        # Compute average analyzer scores from sentences
+        sentences = result_dict.get('sentences', [])
+        if sentences:
+            avg_perplexity = sum(s.get('signals', {}).get('perplexity', 0) for s in sentences) / len(sentences)
+            avg_burstiness = sum(s.get('signals', {}).get('burstiness', 0) for s in sentences) / len(sentences)
+            avg_lexical = sum(s.get('signals', {}).get('lexical', 0) for s in sentences) / len(sentences)
+            avg_pattern = sum(s.get('signals', {}).get('pattern', 0) for s in sentences) / len(sentences)
+        else:
+            avg_perplexity = avg_burstiness = avg_lexical = avg_pattern = 0
         
         predictions.append({
             'essay_id': essay_id,
             'actual': actual_label,
             'predicted': predicted_label,
             'score': predicted_score,
-            'verdict': result['verdict'],
-            'sentence_count': len(result['sentences']),
+            'verdict': result_dict['verdict'],
+            'sentence_count': len(sentences),
             'analyzer_scores': {
-                'perplexity': result.get('perplexity_score', 0),
-                'burstiness': result.get('burstiness_score', 0),
-                'lexical': result.get('lexical_score', 0),
-                'pattern': result.get('pattern_score', 0),
+                'perplexity': round(avg_perplexity, 2),
+                'burstiness': round(avg_burstiness, 2),
+                'lexical': round(avg_lexical, 2),
+                'pattern': round(avg_pattern, 2),
             },
             'source': essay['source']
         })
@@ -198,7 +217,7 @@ def identify_failure_cases(
     failures = [p for p in predictions if p['actual'] != p['predicted']]
     
     if not failures:
-        print(f"\n⚠️  No misclassifications found. All {len(predictions)} essays classified correctly.")
+        print(f"\n[WARN] No misclassifications found. All {len(predictions)} essays classified correctly.")
         return []
     
     print(f"\nFound {len(failures)} misclassification(s)")
@@ -234,7 +253,7 @@ def identify_failure_cases(
     
     print(f"\nTop {len(failure_cases)} high-confidence failure(s) identified for analysis:")
     for fc in failure_cases:
-        print(f"  Essay {fc['essay_id']}: {fc['actual']} → {fc['predicted']} "
+        print(f"  Essay {fc['essay_id']}: {fc['actual']} -> {fc['predicted']} "
               f"(score={fc['score']:.1f}, source={fc['source']})")
     
     return failure_cases
@@ -275,7 +294,7 @@ def save_results(
     with open(results_path, 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     
-    print(f"\n✅ Results saved to {results_path}")
+    print(f"\n[OK] Results saved to {results_path}")
 
 
 def main():
@@ -288,12 +307,12 @@ def main():
         # Load dataset with validation
         print("\n1. Loading test dataset...")
         essays = load_test_dataset()
-        print(f"✅ Loaded {len(essays)} essays")
+        print(f"[OK] Loaded {len(essays)} essays")
         
         # Initialize pipeline
         print("\n2. Initializing detection pipeline...")
         pipeline = DetectionPipeline()
-        print("✅ Pipeline ready")
+        print("[OK] Pipeline ready")
         
         # Run evaluation
         print("\n3. Running evaluation...")
@@ -304,7 +323,7 @@ def main():
         failure_cases = identify_failure_cases(predictions, essays, min_failures=3)
         
         if failure_cases:
-            print("\n⚠️  Manual analysis required:")
+            print("\n[WARN] Manual analysis required:")
             print("   Review the failure cases and add 'analysis' field explaining why each failed.")
         
         # Save results
@@ -316,7 +335,7 @@ def main():
         print("=" * 70)
         
     except EvaluationError as e:
-        print(f"\n❌ Evaluation failed: {e}")
+        print(f"\n[ERROR] Evaluation failed: {e}")
         print("\nTo complete evaluation:")
         print("1. Add 10 human-written essays to data/test_essays.json")
         print("2. Ensure each has: id, text, label='human', source")
@@ -324,7 +343,7 @@ def main():
         return 1
     
     except Exception as e:
-        print(f"\n❌ Unexpected error: {e}")
+        print(f"\n[ERROR] Unexpected error: {e}")
         import traceback
         traceback.print_exc()
         return 1
